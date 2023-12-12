@@ -7,11 +7,18 @@ using ConsoleApp1.Models;
 
 namespace ConsoleApp1.Services
 {
+    /// <summary>
+    /// Hanterar kontaktinformation för kunder.
+    /// Inkluderar funktionalitet för att ladda, spara, lägga till, ta bort, och lista kunder.
+    /// </summary>
     internal class ContactManager
     {
         private List<Customer> customers;
         private string filePath;
 
+        /// <summary>
+        /// Konstruerar en ContactManager och laddar befintliga kontakter från fil.
+        /// </summary>
         public ContactManager()
         {
             customers = new List<Customer>();
@@ -19,6 +26,9 @@ namespace ConsoleApp1.Services
             LoadContacts();
         }
 
+        /// <summary>
+        /// Laddar kontakter från en fil.
+        /// </summary>
         private void LoadContacts()
         {
             if (File.Exists(filePath))
@@ -28,6 +38,9 @@ namespace ConsoleApp1.Services
             }
         }
 
+        /// <summary>
+        /// Sparar nuvarande kontakter till en fil.
+        /// </summary>
         public void SaveContacts()
         {
             var options = new JsonSerializerOptions { WriteIndented = true };
@@ -35,12 +48,20 @@ namespace ConsoleApp1.Services
             File.WriteAllText(filePath, json);
         }
 
+        /// <summary>
+        /// Lägger till en ny kontakt och sparar ändringen.
+        /// </summary>
+        /// <param name="customer">Kunden som ska läggas till.</param>
         public void AddContact(Customer customer)
         {
             customers.Add(customer);
             SaveContacts();
         }
 
+        /// <summary>
+        /// Tar bort en kontakt baserat på e-postadress och sparar ändringen.
+        /// </summary>
+        /// <param name="email">E-postadressen för kunden som ska tas bort.</param>
         public void RemoveContact(string email)
         {
             var customerToRemove = customers.FirstOrDefault(c => c.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
@@ -55,6 +76,9 @@ namespace ConsoleApp1.Services
             }
         }
 
+        /// <summary>
+        /// Listar alla sparade kontakter.
+        /// </summary>
         public void ListContacts()
         {
             foreach (var customer in customers)
@@ -64,6 +88,10 @@ namespace ConsoleApp1.Services
             }
         }
 
+        /// <summary>
+        /// Visar detaljer för en specifik kontakt baserat på e-postadress.
+        /// </summary>
+        /// <param name="email">E-postadressen för den kund vars detaljer ska visas.</param>
         public void ShowContactDetail(string email)
         {
             var customer = customers.FirstOrDefault(c => c.Email.Equals(email, StringComparison.OrdinalIgnoreCase));

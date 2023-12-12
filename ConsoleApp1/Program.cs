@@ -4,6 +4,9 @@ using ConsoleApp1.Services;
 
 namespace ConsoleApp1
 {
+    /// <summary>
+    /// Huvuddprogrammet för att hantera kontadkter.
+    /// </summary>
     class Program
     {
         static void Main(string[] args)
@@ -11,8 +14,10 @@ namespace ConsoleApp1
             ContactManager contactManager = new ContactManager();
             bool exit = false;
 
+            // Huvudloopen för programmet, visar användarmenyn och hanterar användarval.
             while (!exit)
             {
+                // Visa menyn för användaren.
                 Console.WriteLine("1. Lägga till kund");
                 Console.WriteLine("2. Ta bort kunden");
                 Console.WriteLine("3. Lista alla kunder");
@@ -22,6 +27,7 @@ namespace ConsoleApp1
                 Console.Write("Välj ett alternativ: ");
                 var choice = Console.ReadLine();
 
+                // Hanterar användarens val.
                 switch (choice)
                 {
                     case "1":
@@ -46,8 +52,12 @@ namespace ConsoleApp1
             }
         }
 
+        /// <summary>
+        /// Lägger till en ny kund i kontaktlistan.
+        /// </summary>
         static void AddNewCustomer(ContactManager contactManager)
         {
+            // Samla in kundinformation från användaren.
             Console.Write("Ange förnamn: ");
             string firstName = Console.ReadLine() ?? string.Empty;
 
@@ -67,15 +77,23 @@ namespace ConsoleApp1
             contactManager.AddContact(newCustomer);
         }
 
+        /// <summary>
+        /// Tar bort en befintlig kund från kontaktlistan.
+        /// </summary>
         static void RemoveCustomer(ContactManager contactManager)
         {
+            // Frågar efter e-postadress för att identifiera kunden som ska tas bort.
             Console.Write("Ange e-postadressen för den kund du vill ta bort: ");
             string email = Console.ReadLine() ?? string.Empty;
             contactManager.RemoveContact(email);
         }
 
+        /// <summary>
+        /// Visar detaljerad information för en specifik kund.
+        /// </summary>
         static void ShowCustomerDetails(ContactManager contactManager)
         {
+            // Frågar efter e-postadress för att visa detaljer om en specifik kund.
             Console.Write("Ange e-postadressen för den kund du vill se information om: ");
             string email = Console.ReadLine() ?? string.Empty;
             contactManager.ShowContactDetail(email);
