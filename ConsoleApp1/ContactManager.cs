@@ -39,7 +39,7 @@ namespace ConsoleApp1.Services
         }
 
         /// <summary>
-        /// Sparar nuvarande kontakter till en fil.
+        /// Sparar nuvarande kontaskter till en fil.
         /// </summary>
         public void SaveContacts()
         {
