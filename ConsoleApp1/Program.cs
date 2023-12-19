@@ -1,23 +1,26 @@
 ﻿using System;
 using ConsoleApp1.Models;
 using ConsoleApp1.Services;
+using ConsoleApp1.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ConsoleApp1
 {
-    /// <summary>
-    /// Huvuddprogrammet för att hantera kontadkter.
-    /// </summary>
     class Program
     {
         static void Main(string[] args)
         {
-            ContactManager contactManager = new ContactManager();
-            bool exit = false;
+            var serviceProvider = ConfigureServices();
 
-            // Huvudloopen för programmet, visar användarmenyn och hanterar användarval.
+            var contactManager = serviceProvider.GetService<ContactManager>();
+            if (contactManager == null)
+            {
+                throw new InvalidOperationException("ContactManager service is not available.");
+            }
+
+            bool exit = false;
             while (!exit)
             {
-                // Visa menyn för användaren.
                 Console.WriteLine("1. Lägga till kund");
                 Console.WriteLine("2. Ta bort kunden");
                 Console.WriteLine("3. Lista alla kunder");
@@ -27,7 +30,6 @@ namespace ConsoleApp1
                 Console.Write("Välj ett alternativ: ");
                 var choice = Console.ReadLine();
 
-                // Hanterar användarens val.
                 switch (choice)
                 {
                     case "1":
@@ -51,6 +53,16 @@ namespace ConsoleApp1
                 }
             }
         }
+
+        private static ServiceProvider ConfigureServices()
+        {
+            var services = new ServiceCollection();
+            services.AddSingleton<IFileService, FileService>();
+            services.AddSingleton<ICustomerService, CustomerService>();
+            services.AddSingleton<ContactManager>();
+            return services.BuildServiceProvider();
+        }
+
 
         /// <summary>
         /// Lägger till en ny kund i kontaktlistan.
