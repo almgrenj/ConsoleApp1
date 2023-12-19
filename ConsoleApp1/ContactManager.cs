@@ -7,11 +7,19 @@ using ConsoleApp1.Models;
 
 namespace ConsoleApp1.Services
 {
+    /// <summary>
+    /// Hanterar kontakter och deras lagring i en JSON-fil.
+    /// </summary>
     internal class ContactManager
     {
         private readonly ICustomerService _customerService;
         private readonly IFileService _fileService;
 
+        /// <summary>
+        /// Konstruktor för ContactManager.
+        /// </summary>
+        /// <param name="customerService">En tjänst för kunder.</param>
+        /// <param name="fileService">En tjänst för filhantering.</param>
         public ContactManager(ICustomerService customerService, IFileService fileService)
         {
             _customerService = customerService ?? throw new ArgumentNullException(nameof(customerService));

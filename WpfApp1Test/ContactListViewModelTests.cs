@@ -1,76 +1,89 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WpfApp1.ViewModels;
-using ConsoleApp1.Models; // Using the Customer class from ConsoleApp1.Models
+using ConsoleApp1.Models;
 using System.Linq;
 
 namespace WpfApp1.Tests
 {
+    /// <summary>
+    /// Enhetstester för ContactListViewModel.
+    /// </summary>
     [TestClass]
     public class ContactListViewModelTests
     {
         private ContactListViewModel _viewModel;
 
+        /// <summary>
+        /// Metod som körs före varje testfall för att ställa in testmiljön.
+        /// </summary>
         [TestInitialize]
         public void Setup()
         {
             _viewModel = new ContactListViewModel();
         }
 
+        /// <summary>
+        /// Testfall för att lägga till en kund i samlingen.
+        /// </summary>
         [TestMethod]
         public void AddCustomer_ShouldAddCustomerToCollection()
         {
-            // Arrange
+            // Arrangera
             var newCustomer = new Customer("John", "Doe", "555-1234", "john.doe@example.com", "123 Main St");
 
-            // Act
+            // Utför
             _viewModel.AddCustomerCommand.Execute(newCustomer);
 
-            // Assert
+            // Påstå
             var customerInCollection = _viewModel.Customers.FirstOrDefault(c => c.Email == newCustomer.Email);
-            Assert.IsNotNull(customerInCollection, "The customer should be added to the collection.");
-            Assert.AreEqual(newCustomer.FirstName, customerInCollection.FirstName, "First names should be the same.");
-            Assert.AreEqual(newCustomer.LastName, customerInCollection.LastName, "Last names should be the same.");
-            Assert.AreEqual(newCustomer.PhoneNumber, customerInCollection.PhoneNumber, "Phone numbers should be the same.");
-            Assert.AreEqual(newCustomer.Email, customerInCollection.Email, "Email addresses should be the same.");
-            Assert.AreEqual(newCustomer.Address, customerInCollection.Address, "Addresses should be the same.");
+            Assert.IsNotNull(customerInCollection, "Kunden bör läggas till i samlingen.");
+            Assert.AreEqual(newCustomer.FirstName, customerInCollection.FirstName, "Förnamn bör vara samma.");
+            Assert.AreEqual(newCustomer.LastName, customerInCollection.LastName, "Efternamn bör vara samma.");
+            Assert.AreEqual(newCustomer.PhoneNumber, customerInCollection.PhoneNumber, "Telefonnummer bör vara samma.");
+            Assert.AreEqual(newCustomer.Email, customerInCollection.Email, "E-postadresser bör vara samma.");
+            Assert.AreEqual(newCustomer.Address, customerInCollection.Address, "Adresser bör vara samma.");
         }
 
+        /// <summary>
+        /// Testfall för att uppdatera kunduppgifter.
+        /// </summary>
         [TestMethod]
         public void EditCustomer_ShouldUpdateCustomerDetails()
         {
-            // Arrange
+            // Arrangera
             var customer = new Customer("Jane", "Doe", "555-6789", "jane.doe@example.com", "456 Main St");
             _viewModel.Customers.Add(customer);
             _viewModel.SelectedCustomer = customer;
 
             var updatedCustomer = new Customer("Jane", "Smith", "555-6789", "jane.smith@example.com", "789 Main St");
 
-            // Act
+            // Utför
             _viewModel.EditCustomerCommand.Execute(updatedCustomer);
 
-            // Assert
+            // Påstå
             var editedCustomer = _viewModel.Customers.FirstOrDefault(c => c.Email == updatedCustomer.Email);
-            Assert.IsNotNull(editedCustomer, "The customer should be updated in the collection.");
-            Assert.AreEqual(updatedCustomer.LastName, editedCustomer.LastName, "Last names should be updated.");
-            // Add assertions for other fields as needed
+            Assert.IsNotNull(editedCustomer, "Kunden bör uppdateras i samlingen.");
+            Assert.AreEqual(updatedCustomer.LastName, editedCustomer.LastName, "Efternamn bör uppdateras.");
+            // Lägg till påståenden för andra fält vid behov
         }
 
+        /// <summary>
+        /// Testfall för att ta bort en kund från samlingen.
+        /// </summary>
         [TestMethod]
         public void DeleteCustomer_ShouldRemoveCustomerFromCollection()
         {
-            // Arrange
+            // Arrangera
             var customer = new Customer("Jane", "Doe", "555-6789", "jane.doe@example.com", "456 Main St");
             _viewModel.Customers.Add(customer);
             _viewModel.SelectedCustomer = customer;
 
-            // Act
+            // Utför
             _viewModel.DeleteCustomerCommand.Execute(null);
 
-            // Assert
+            // Påstå
             var deletedCustomer = _viewModel.Customers.FirstOrDefault(c => c.Email == customer.Email);
-            Assert.IsNull(deletedCustomer, "The customer should be removed from the collection.");
+            Assert.IsNull(deletedCustomer, "Kunden bör tas bort från samlingen.");
         }
-
-
     }
 }

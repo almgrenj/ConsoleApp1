@@ -4,12 +4,18 @@ using WpfApp1.Commands;
 
 namespace WpfApp1.Tests
 {
+    /// <summary>
+    /// Enhetstest för RelayCommand.
+    /// </summary>
     [TestClass]
     public class RelayCommandTests
     {
         private bool isExecuted;
         private bool canExecute;
 
+        /// <summary>
+        /// Metod som körs före varje testfall för att ställa in testmiljön.
+        /// </summary>
         [TestInitialize]
         public void Setup()
         {
@@ -17,28 +23,34 @@ namespace WpfApp1.Tests
             canExecute = true;
         }
 
+        /// <summary>
+        /// Testfall för att kontrollera att RelayCommand utför en åtgärd.
+        /// </summary>
         [TestMethod]
         public void RelayCommand_ShouldExecute()
         {
-            // Arrange
+            // Arrangera
             var command = new RelayCommand(() => isExecuted = true, () => canExecute);
 
-            // Act
+            // Utför
             command.Execute(null);
 
-            // Assert
-            Assert.IsTrue(isExecuted, "Command should set isExecuted to true.");
+            // Påstå
+            Assert.IsTrue(isExecuted, "Kommandot bör sätta isExecuted till true.");
         }
 
+        /// <summary>
+        /// Testfall för att kontrollera att RelayCommand respekterar CanExecute.
+        /// </summary>
         [TestMethod]
         public void RelayCommand_ShouldRespectCanExecute()
         {
-            // Arrange
+            // Arrangera
             var command = new RelayCommand(() => isExecuted = true, () => canExecute);
             canExecute = false;
 
-            // Act & Assert
-            Assert.IsFalse(command.CanExecute(null), "Command should not be executable.");
+            // Utför och påstå
+            Assert.IsFalse(command.CanExecute(null), "Kommandot bör inte vara exekverbart.");
         }
     }
 }

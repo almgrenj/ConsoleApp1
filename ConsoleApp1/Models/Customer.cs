@@ -3,8 +3,8 @@
 namespace ConsoleApp1.Models
 {
     /// <summary>
-    /// Represents a customer with basic contact information.
-    /// Contains properties for first name, last name, phone number, email, and address.
+    /// Representerar en kund med grundläggande kontaktinformation.
+    /// Innehåller egenskaper för förnamn, efternamn, telefonnummer, e-post och adress.
     /// </summary>
     public class Customer
     {
@@ -15,15 +15,15 @@ namespace ConsoleApp1.Models
         public string Address { get; set; } = string.Empty;
 
         /// <summary>
-        /// Default constructor that creates an empty customer.
+        /// Standardkonstruktor som skapar en tom kund.
         /// </summary>
         public Customer() { }
 
         /// <summary>
-        /// Deep copy constructor.
-        /// Creates a new instance of Customer by copying the properties from another Customer instance.
+        /// Djup kopieringskonstruktor.
+        /// Skapar en ny instans av Customer genom att kopiera egenskaperna från en annan Customer-instans.
         /// </summary>
-        /// <param name="other">The customer to copy.</param>
+        /// <param name="other">Kunden att kopiera från.</param>
         public Customer(Customer other)
         {
             if (other == null)
@@ -37,9 +37,9 @@ namespace ConsoleApp1.Models
         }
 
         /// <summary>
-        /// Method to update the current instance from another instance.
+        /// Metod för att uppdatera den aktuella instansen från en annan instans.
         /// </summary>
-        /// <param name="copy">The customer to copy from.</param>
+        /// <param name="copy">Kunden att kopiera från.</param>
         public void UpdateFromCopy(Customer copy)
         {
             if (copy == null)
@@ -53,13 +53,13 @@ namespace ConsoleApp1.Models
         }
 
         /// <summary>
-        /// Constructor that creates a customer with specific details.
+        /// Konstruktor som skapar en kund med specifika detaljer.
         /// </summary>
-        /// <param name="firstName">The customer's first name.</param>
-        /// <param name="lastName">The customer's last name.</param>
-        /// <param name="phoneNumber">The customer's phone number.</param>
-        /// <param name="email">The customer's email address.</param>
-        /// <param name="address">The customer's address.</param>
+        /// <param name="firstName">Kundens förnamn.</param>
+        /// <param name="lastName">Kundens efternamn.</param>
+        /// <param name="phoneNumber">Kundens telefonnummer.</param>
+        /// <param name="email">Kundens e-postadress.</param>
+        /// <param name="address">Kundens adress.</param>
         public Customer(string firstName, string lastName, string phoneNumber, string email, string address)
         {
             FirstName = firstName;
@@ -70,13 +70,13 @@ namespace ConsoleApp1.Models
         }
 
         /// <summary>
-        /// Returns a string representation of the customer.
-        /// Includes first name, last name, phone number, email, and address.
+        /// Returnerar en strängrepresentation av kunden.
+        /// Inkluderar förnamn, efternamn, telefonnummer, e-post och adress.
         /// </summary>
-        /// <returns>A string describing the customer.</returns>
+        /// <returns>En sträng som beskriver kunden.</returns>
         public override string ToString()
         {
-            return $"Name: {FirstName} {LastName}\nPhone Number: {PhoneNumber}\nEmail: {Email}\nAddress: {Address}";
+            return $"Namn: {FirstName} {LastName}\nTelefonnummer: {PhoneNumber}\nE-post: {Email}\nAdress: {Address}";
         }
     }
 }
