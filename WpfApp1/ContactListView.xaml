@@ -33,11 +33,11 @@
 
         <!-- Controls for adding, editing, deleting, and deleting by email -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
-            <Button Content="Add" Command="{Binding AddCustomerCommand}" Margin="10" Width="100" Height="50"/>
-            <Button Content="Edit" Command="{Binding EditCustomerCommand}" Margin="10" IsEnabled="{Binding SelectedCustomer}" Width="100" Height="50"/>
-            <Button Content="Delete" Command="{Binding DeleteCustomerCommand}" Margin="10" IsEnabled="{Binding SelectedCustomer}" Width="100" Height="50"/>
-            <TextBox Text="{Binding EmailToDelete}" Width="100" Margin="10" Height="50"/>
-            <Button Content="Delete by Email" Command="{Binding DeleteByEmailCommand}" Margin="10" Width="200" Height="50"/>
+            <Button Content="Add" Command="{Binding AddCustomerCommand}" Margin="10" Width="50" Height="50"/>
+            <Button Content="Edit" Command="{Binding EditCustomerCommand}" Margin="10" IsEnabled="{Binding SelectedCustomer}" Width="50" Height="50"/>
+            <Button Content="Delete" Command="{Binding DeleteCustomerCommand}" Margin="10" IsEnabled="{Binding SelectedCustomer}" Width="50" Height="50"/>
+            <TextBox Text="{Binding EmailToDelete}" Width="300" Margin="10" Height="50"/>
+            <Button Content="Delete by Email" Command="{Binding DeleteByEmailCommand}" Margin="10" Width="100" Height="50"/>
         </StackPanel>
     </Grid>
 </Window>
