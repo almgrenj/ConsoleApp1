@@ -102,14 +102,21 @@ namespace WpfApp1.ViewModels
         {
             if (SelectedCustomer != null)
             {
-                var detailsView = new CustomerDetailsView(SelectedCustomer, true);
+                var customerCopy = new Customer(SelectedCustomer); // Make a copy
+                var detailsView = new CustomerDetailsView(customerCopy, true);
                 if (detailsView.ShowDialog() == true)
                 {
-                    // Spara ändringar om användaren klickar på "Update"
-                    SaveCustomersToFile();
+                    // Update original customer with changes from the copy
+                    var index = Customers.IndexOf(SelectedCustomer);
+                    if (index != -1)
+                    {
+                        Customers[index] = customerCopy;
+                        SaveCustomersToFile();
+                    }
                 }
             }
         }
+
 
 
 

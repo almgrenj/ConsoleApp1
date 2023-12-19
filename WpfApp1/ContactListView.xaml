@@ -4,6 +4,7 @@
         Title="Customers" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
+
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
