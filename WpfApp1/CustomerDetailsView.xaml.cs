@@ -5,7 +5,7 @@ namespace WpfApp1
 {
     public partial class CustomerDetailsView : Window
     {
-        // Deklarera en egenskap för Customer
+        // Deklarera en egenskap för Customer.
         public Customer Customer { get; private set; }
 
         // En flagga för att indikera om det är en uppdatering eller skapande av en Customer
